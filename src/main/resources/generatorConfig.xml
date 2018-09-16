@@ -70,47 +70,47 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table tableName="wx_users" domainObjectName="wxUser"
+        <table tableName="wx_users" domainObjectName="WxUser"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="cates" domainObjectName="cate"
+        <table tableName="cates" domainObjectName="Cate"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="shops" domainObjectName="shop"
+        <table tableName="shops" domainObjectName="Shop"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="orders" domainObjectName="order"
+        <table tableName="orders" domainObjectName="Order"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="order_details" domainObjectName="orderDetail"
+        <table tableName="order_details" domainObjectName="OrderDetail"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="customers" domainObjectName="customer"
+        <table tableName="customers" domainObjectName="Customer"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="address" domainObjectName="address"
+        <table tableName="address" domainObjectName="Address"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="comments" domainObjectName="comment"
+        <table tableName="comments" domainObjectName="Comment"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="dishes" domainObjectName="dishes"
+        <table tableName="dishes" domainObjectName="Dishes"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="shop_marked" domainObjectName="shopMarked"
+        <table tableName="shop_marked" domainObjectName="ShopMarked"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="config" domainObjectName="config"
+        <table tableName="config" domainObjectName="Config"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>

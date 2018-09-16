@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.robin.awm.dao.ConfigMapper" >
+  <resultMap id="BaseResultMap" type="pers.robin.awm.model.Config" >
+    <constructor >
+      <arg column="key" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="value" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="pers.robin.awm.model.Config" >
+    insert into config (key, value)
+    values (#{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pers.robin.awm.model.Config" >
+    insert into config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        key,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
