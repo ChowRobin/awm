@@ -1,20 +1,21 @@
-DROP TABLE IF EXISTS wx_users;
-DROP TABLE IF EXISTS customers;
-DROP TABLE IF EXISTS address;
-DROP TABLE IF EXISTS dishes;
-DROP TABLE IF EXISTS cates;
-DROP TABLE IF EXISTS order_details;
-DROP TABLE IF EXISTS shop_marked;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS comments;
-DROP TABLE IF EXISTS shops;
-DROP TABLE IF EXISTS config;
-DROP TABLE IF EXISTS users;
+# DROP TABLE IF EXISTS wx_users;
+# DROP TABLE IF EXISTS customers;
+# DROP TABLE IF EXISTS address;
+# DROP TABLE IF EXISTS dishes;
+# DROP TABLE IF EXISTS cates;
+# DROP TABLE IF EXISTS order_details;
+# DROP TABLE IF EXISTS shop_marked;
+# DROP TABLE IF EXISTS orders;
+# DROP TABLE IF EXISTS comments;
+# DROP TABLE IF EXISTS shops;
+# DROP TABLE IF EXISTS config;
+# DROP TABLE IF EXISTS users;
 
 CREATE TABLE wx_users (
   id INT (10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
   wxid VARCHAR (30)
 );
+CREATE UNIQUE INDEX idx_wxid ON wx_users(wxid(30));
 
 CREATE TABLE users (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -34,6 +35,7 @@ CREATE TABLE customers (
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP
 );
+CREATE INDEX idx_customer_name ON customers(name(10));
 
 CREATE TABLE address (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -57,6 +59,7 @@ CREATE TABLE shops (
 
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+CREATE INDEX idx_shop_name ON shops(name(30));
 
 CREATE TABLE cates (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -80,6 +83,7 @@ CREATE TABLE dishes (
   FOREIGN KEY (cate_id) REFERENCES cates(id) ON DELETE NO ACTION,
   FOREIGN KEY (provider) REFERENCES shops(id) on DELETE NO ACTION
 );
+CREATE INDEX idx_dishes_name ON dishes(name(30));
 
 CREATE TABLE orders (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -98,6 +102,10 @@ CREATE TABLE orders (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE NO ACTION,
   FOREIGN KEY (provider) REFERENCES shops(id) ON DELETE NO ACTION
 );
+# 通过订单号去数据库中查询，判断该订单是否已经存在
+CREATE UNIQUE INDEX idx_order_code ON orders(code(30));
+# 优先处理录入时间长的订单
+CREATE INDEX idx_created_time ON orders(created_at);
 
 CREATE TABLE order_details (
   order_id INT(10) UNSIGNED NOT NULL,
