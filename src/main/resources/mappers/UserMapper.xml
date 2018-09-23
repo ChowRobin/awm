@@ -105,4 +105,8 @@
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectAll">
+    select <include refid="Base_Column_List" />
+    from users;
+  </select>
 </mapper>
