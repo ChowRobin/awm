@@ -11,6 +11,22 @@
       <arg column="updated_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+  <sql id="queryCondition">
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test="tel!= null and tel != ''">
+        and tel LIKE #{tel}
+      </if>
+      <if test="password != null and password != ''">
+        and password LIKE #{password}
+      </if>
+      <if test="role != null and role != ''">
+        and role = #{role}
+      </if>
+    </where>
+  </sql>
   <sql id="Base_Column_List" >
     id, tel, password, role, created_at, updated_at
   </sql>
@@ -105,8 +121,9 @@
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectAll">
+  <select id="selectByCondition" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" />
-    from users;
+    from users
+    <include refid="queryCondition"/>
   </select>
 </mapper>

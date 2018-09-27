@@ -1,12 +1,15 @@
 package pers.robin.awm.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pers.robin.awm.config.PageConfig;
 import pers.robin.awm.dao.UserMapper;
 import pers.robin.awm.model.User;
 import pers.robin.awm.service.UserService;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,8 +18,9 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<User> readAll() {
-        return userMapper.selectAll();
+    public List<User> findByCondition(Map<String, Object> map, int pageId) {
+        PageHelper.startPage(pageId, PageConfig.size);
+        return userMapper.selectByCondition(map);
     }
 
     @Override
@@ -37,5 +41,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteById(Integer id) {
         return userMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<User> findByPage(Integer pageId) {
+        return null;
     }
 }

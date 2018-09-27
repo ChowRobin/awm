@@ -4,10 +4,13 @@ import org.springframework.stereotype.Service;
 import pers.robin.awm.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
-    List<User> readAll();
+    List<User> findByCondition(Map<String, Object> map, int pageId);
+
+    List<User> findByPage(Integer pageId);
 
     User findById(Integer id);
 

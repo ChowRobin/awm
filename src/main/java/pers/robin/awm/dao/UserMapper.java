@@ -4,7 +4,9 @@ import org.springframework.stereotype.Repository;
 import pers.robin.awm.model.User;
 
 import java.util.List;
+import java.util.Map;
 
+@Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -18,5 +20,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<User> selectAll();
+    List<User> selectByCondition(Map<String, Object> map);
 }
