@@ -22,10 +22,10 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/{page_id}")
-    public ResultBean<Collection<User>> getByCondition(@PathVariable("page_id") Integer pageId, HttpServletRequest request) {
-        Map<String, Object> map = CommonUtil.getParameterMap(request);
-//        return new ResultBean<Collection<User>>(userService.readAll());
-        return new ResultBean<Collection<User>>(userService.findByCondition(map, pageId));
+    public ResultBean<Collection<User>> getUserByCondition(@PathVariable("page_id") Integer pageId,
+                                                           HttpServletRequest request) {
+        return new ResultBean<Collection<User>>(userService.findByCondition(
+                                                CommonUtil.getParameterMap(request), pageId));
     }
 
 }

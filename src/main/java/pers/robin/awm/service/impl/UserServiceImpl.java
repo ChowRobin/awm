@@ -43,8 +43,4 @@ public class UserServiceImpl implements UserService {
         return userMapper.deleteByPrimaryKey(id);
     }
 
-    @Override
-    public List<User> findByPage(Integer pageId) {
-        return null;
-    }
 }

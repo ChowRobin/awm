@@ -10,8 +10,6 @@ public interface UserService {
 
     List<User> findByCondition(Map<String, Object> map, int pageId);
 
-    List<User> findByPage(Integer pageId);
-
     User findById(Integer id);
 
     int create(User user);
