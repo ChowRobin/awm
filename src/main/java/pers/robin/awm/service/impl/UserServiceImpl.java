@@ -30,7 +30,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int create(User user) {
-        return userMapper.insertSelective(user);
+        userMapper.insertSelective(user);
+        return user.getId();
     }
 
     @Override

@@ -5,13 +5,32 @@
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="gender" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="gender" jdbcType="TINYINT" javaType="java.lang.Short" />
       <arg column="sid" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="img" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="created_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="updated_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+  <sql id="queryCondition">
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test="name != null and name != ''">
+        and `name` LIKE #{name}
+      </if>
+      <if test="gender != null and gender != ''">
+        and gender = #{gender}
+      </if>
+      <if test="sid != null and sid != ''">
+        and sid = #{sid}
+      </if>
+      <if test="img != null and img != ''">
+        and img = #{img}
+      </if>
+    </where>
+  </sql>
   <sql id="Base_Column_List" >
     id, name, gender, sid, img, created_at, updated_at
   </sql>
@@ -116,4 +135,9 @@
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from customers
+    <include refid="queryCondition" />
+  </select>
 </mapper>

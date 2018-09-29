@@ -9,13 +9,13 @@ public class User {
 
     private String password;
 
-    private Byte role;
+    private short role;
 
     private Date createdAt;
 
     private Date updatedAt;
 
-    public User(Integer id, String tel, String password, Byte role, Date createdAt, Date updatedAt) {
+    public User(Integer id, String tel, String password, short role, Date createdAt, Date updatedAt) {
         this.id = id;
         this.tel = tel;
         this.password = password;
@@ -52,11 +52,11 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public Byte getRole() {
+    public short getRole() {
         return role;
     }
 
-    public void setRole(Byte role) {
+    public void setRole(short role) {
         this.role = role;
     }
 

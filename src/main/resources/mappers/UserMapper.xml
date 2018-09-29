@@ -6,7 +6,7 @@
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="role" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="role" jdbcType="TINYINT" javaType="java.lang.Short" />
       <arg column="created_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="updated_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
@@ -40,7 +40,7 @@
     delete from users
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="pers.robin.awm.model.User" >
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="pers.robin.awm.model.User" >
     insert into users (id, tel, password, 
       role, created_at, updated_at
       )
@@ -48,7 +48,7 @@
       #{role,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="pers.robin.awm.model.User" >
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="pers.robin.awm.model.User" >
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

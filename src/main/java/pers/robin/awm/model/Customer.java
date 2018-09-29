@@ -2,12 +2,12 @@ package pers.robin.awm.model;
 
 import java.util.Date;
 
-public class Customer {
+public class Customer extends User {
     private Integer id;
 
     private String name;
 
-    private Byte gender;
+    private short gender;
 
     private String sid;
 
@@ -17,7 +17,25 @@ public class Customer {
 
     private Date updatedAt;
 
-    public Customer(Integer id, String name, Byte gender, String sid, String img, Date createdAt, Date updatedAt) {
+    private String tel;
+
+    private String password;
+
+    private short role;
+
+    public Customer(Integer id, String name, Byte gender, String sid, String img, Date createdAt, Date updatedAt,
+                    String tel, String password) {
+        super(id, tel, password, (short) 0, createdAt, updatedAt);
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.sid = sid;
+        this.img = img;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Customer(Integer id, String name, short gender, String sid, String img, Date createdAt, Date updatedAt) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -47,11 +65,11 @@ public class Customer {
         this.name = name == null ? null : name.trim();
     }
 
-    public Byte getGender() {
+    public short getGender() {
         return gender;
     }
 
-    public void setGender(Byte gender) {
+    public void setGender(short gender) {
         this.gender = gender;
     }
 
@@ -86,4 +104,6 @@ public class Customer {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
 }
