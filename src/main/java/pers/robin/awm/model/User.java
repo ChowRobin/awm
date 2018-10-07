@@ -15,7 +15,7 @@ public class User {
 
     private Date updatedAt;
 
-    public User(Integer id, String tel, String password, short role, Date createdAt, Date updatedAt) {
+    public User(Integer id, String tel, String password, Short role, Date createdAt, Date updatedAt) {
         this.id = id;
         this.tel = tel;
         this.password = password;

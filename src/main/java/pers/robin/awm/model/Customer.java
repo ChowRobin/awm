@@ -35,7 +35,7 @@ public class Customer extends User {
         this.updatedAt = updatedAt;
     }
 
-    public Customer(Integer id, String name, short gender, String sid, String img, Date createdAt, Date updatedAt) {
+    public Customer(Integer id, String name, Short gender, String sid, String img, Date createdAt, Date updatedAt) {
         this.id = id;
         this.name = name;
         this.gender = gender;

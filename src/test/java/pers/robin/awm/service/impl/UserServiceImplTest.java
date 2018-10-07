@@ -12,12 +12,9 @@ public class UserServiceImplTest {
 
     private UserService userService = new UserServiceImpl();
 
+    static int a;
+
     @Test
     public void create() {
-        User user = new User();
-        user.setTel("13655882379");
-        user.setPassword("heee");
-        user.setRole((short) 0);
-        System.out.println(userService.create(user));
     }
 }
