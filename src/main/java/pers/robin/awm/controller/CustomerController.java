@@ -34,4 +34,13 @@ public class CustomerController {
     public ResultBean<Integer> registerCustomer(@RequestBody Customer customer) {
         return new ResultBean<Integer>(customerService.register(customer));
     }
+
+    @PostMapping("/update/{id}")
+    public ResultBean<Integer> addCustomerFields(@RequestParam Integer id,
+                                                  @RequestBody Customer customer,
+                                                  HttpServletRequest request) {
+        customer.setId(id);
+        return new ResultBean<Integer>(customerService.updateById(customer));
+    }
+
 }
