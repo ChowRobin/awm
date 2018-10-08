@@ -75,4 +75,9 @@ public class User {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    @Override
+    public String toString() {
+        return "user(id = " + id + ", tel = " + tel + ", password = " + password + ", role = " + role + ")";
+    }
 }
