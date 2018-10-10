@@ -36,9 +36,9 @@ public class JWTUtil {
 
     /**
      * get msg from token without password
-     * @return token中包含的用户名
+     * @return token中包含的电话号码
      */
-    public static String getUsername(String token) {
+    public static String getTel(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim("tel").asString();

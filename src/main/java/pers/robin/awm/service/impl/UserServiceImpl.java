@@ -8,6 +8,7 @@ import pers.robin.awm.dao.UserMapper;
 import pers.robin.awm.model.User;
 import pers.robin.awm.service.UserService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,4 +45,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
+    public User findByTel(String tel) {
+        Map map = new HashMap();
+        map.put("tel", tel);
+        return (User) findByCondition(map, 0).get(0);
+    }
 }
