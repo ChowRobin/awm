@@ -7,12 +7,28 @@
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="img" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Short" />
       <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="created_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="updated_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+  <sql id="queryCondition">
+    <where>
+      <if test="user_id != null and user_id != ''">
+        and user_id = #{user_id}
+      </if>
+      <if test="name != null and name != ''">
+        and `name` LIKE #{name}
+      </if>
+      <if test="status != null and status != ''">
+        and status = #{status}
+      </if>
+      <if test="address != null and address != ''">
+        and address LIKE #{address}
+      </if>
+    </where>
+  </sql>
   <sql id="Base_Column_List" >
     id, user_id, name, img, status, address, created_at, updated_at
   </sql>
@@ -127,4 +143,9 @@
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from shops
+    <include refid="queryCondition" />
+  </select>
 </mapper>

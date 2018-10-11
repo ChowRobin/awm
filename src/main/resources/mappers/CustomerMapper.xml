@@ -26,9 +26,6 @@
       <if test="sid != null and sid != ''">
         and sid = #{sid}
       </if>
-      <if test="img != null and img != ''">
-        and img = #{img}
-      </if>
     </where>
   </sql>
   <sql id="Base_Column_List" >

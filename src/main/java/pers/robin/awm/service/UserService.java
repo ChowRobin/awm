@@ -19,4 +19,5 @@ public interface UserService {
 
     User findByTel(String tel);
 
+    String login(String tel, String password);
 }

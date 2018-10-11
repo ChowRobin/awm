@@ -54,4 +54,9 @@ public class CustomerServiceImpl implements CustomerService {
         customerMapper.insertSelective(customer);
         return customer.getId();
     }
+
+    @Override
+    public String login(String tel, String password) {
+        return userService.login(tel, password);
+    }
 }

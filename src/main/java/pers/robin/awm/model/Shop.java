@@ -11,7 +11,7 @@ public class Shop {
 
     private String img;
 
-    private Byte status;
+    private Short status;
 
     private String address;
 
@@ -19,7 +19,7 @@ public class Shop {
 
     private Date updatedAt;
 
-    public Shop(Integer id, Integer userId, String name, String img, Byte status, String address, Date createdAt, Date updatedAt) {
+    public Shop(Integer id, Integer userId, String name, String img, Short status, String address, Date createdAt, Date updatedAt) {
         this.id = id;
         this.userId = userId;
         this.name = name;
@@ -66,11 +66,11 @@ public class Shop {
         this.img = img == null ? null : img.trim();
     }
 
-    public Byte getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Short status) {
         this.status = status;
     }
 

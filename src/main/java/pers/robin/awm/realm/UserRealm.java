@@ -9,13 +9,14 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pers.robin.awm.bean.JWTToken;
 import pers.robin.awm.config.RoleConfig;
 import pers.robin.awm.model.User;
 import pers.robin.awm.service.UserService;
 import pers.robin.awm.util.JWTUtil;
 
-
+@Service
 public class UserRealm extends AuthorizingRealm {
 
     @Autowired

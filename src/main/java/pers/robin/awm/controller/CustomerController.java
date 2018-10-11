@@ -1,6 +1,8 @@
 package pers.robin.awm.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pers.robin.awm.bean.ResultBean;
 import pers.robin.awm.model.Customer;
@@ -36,11 +38,17 @@ public class CustomerController {
     }
 
     @PostMapping("/update/{id}")
-    public ResultBean<Integer> addCustomerFields(@RequestParam Integer id,
+    @RequiresRoles("customer")
+    public ResultBean<Integer> updateCustomerFields(@PathVariable Integer id,
                                                   @RequestBody Customer customer,
                                                   HttpServletRequest request) {
         customer.setId(id);
         return new ResultBean<Integer>(customerService.updateById(customer));
+    }
+
+    @PostMapping("/login")
+    public ResultBean<String> login(@RequestBody Customer customer) {
+        return new ResultBean<String>(customerService.login(customer.getTel(), customer.getPassword()));
     }
 
 }

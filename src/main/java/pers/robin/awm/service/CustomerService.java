@@ -18,4 +18,6 @@ public interface CustomerService {
     int deleteById(Integer id);
 
     int register(Customer customer);
+
+    String login(String tel, String password);
 }

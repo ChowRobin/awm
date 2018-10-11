@@ -1,12 +1,15 @@
 package pers.robin.awm.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.sun.tools.javac.comp.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.robin.awm.config.PageConfig;
 import pers.robin.awm.dao.UserMapper;
+import pers.robin.awm.exception.CheckException;
 import pers.robin.awm.model.User;
 import pers.robin.awm.service.UserService;
+import pers.robin.awm.util.JWTUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -50,5 +53,19 @@ public class UserServiceImpl implements UserService {
         Map map = new HashMap();
         map.put("tel", tel);
         return (User) findByCondition(map, 0).get(0);
+    }
+
+    @Override
+    public String login(String tel, String password) {
+        User user = findByTel(tel);
+        if (user == null) {
+            throw new CheckException("tel is not register");
+        }
+
+        if (user.getPassword().equals(password)) {
+            return JWTUtil.sign(tel, password);
+        } else {
+            throw new CheckException("password is not current");
+        }
     }
 }

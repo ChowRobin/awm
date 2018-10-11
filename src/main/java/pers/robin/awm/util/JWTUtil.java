@@ -22,6 +22,9 @@ public class JWTUtil {
      * @return
      */
     public static boolean verify(String token, String tel, String password) {
+        System.out.println("token:" + token);
+        System.out.println("tel:" + tel);
+        System.out.println("password:" + password);
         try {
             Algorithm algorithm = Algorithm.HMAC256(password);
             JWTVerifier verifier = JWT.require(algorithm)
