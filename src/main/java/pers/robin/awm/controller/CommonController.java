@@ -17,4 +17,12 @@ public class CommonController {
         resultBean.setCode(ResultBean.NO_LOGIN);
         return resultBean;
     }
+
+    @RequestMapping("/500")
+    public ResultBean checkFail() {
+        ResultBean<String> resultBean = new ResultBean<>();
+        resultBean.setMsg("token check failed");
+        resultBean.setCode(ResultBean.getFAIL());
+        return resultBean;
+    }
 }

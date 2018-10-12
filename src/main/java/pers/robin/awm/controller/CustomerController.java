@@ -38,7 +38,6 @@ public class CustomerController {
     }
 
     @PostMapping("/update/{id}")
-    @RequiresRoles("customer")
     public ResultBean<Integer> updateCustomerFields(@PathVariable Integer id,
                                                   @RequestBody Customer customer,
                                                   HttpServletRequest request) {
