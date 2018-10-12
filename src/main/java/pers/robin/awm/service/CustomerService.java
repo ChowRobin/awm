@@ -11,7 +11,7 @@ public interface CustomerService {
 
     Customer findById(Integer id);
 
-    int Create(Customer customer);
+    int create(Customer customer);
 
     int updateById(Customer customer);
 

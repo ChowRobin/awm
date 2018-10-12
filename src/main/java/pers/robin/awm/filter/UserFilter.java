@@ -48,18 +48,24 @@ public class UserFilter implements Filter {
         } else if (CommonUtil.isNumeric(path)) {
             System.out.println("req is select");
         } else {
-            auth(req, res);
+            if (!auth(req, res)) {
+                return;
+            }
         }
         filterChain.doFilter(req, res);
     }
 
-    private void auth(HttpServletRequest req, HttpServletResponse res) {
+    private boolean auth(HttpServletRequest req, HttpServletResponse res) {
+        boolean flag = true;
         String token = req.getHeader("Authorization");
         if (token == null) {
             responseError("401", req, res);
+            flag = false;
         } else if (!checkToken(new JWTToken(token))) {
             responseError("500", req, res);
+            flag = false;
         }
+        return flag;
     }
 
     private boolean checkToken(JWTToken jwt) {

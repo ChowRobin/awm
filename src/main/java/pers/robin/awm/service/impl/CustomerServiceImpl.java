@@ -33,8 +33,12 @@ public class CustomerServiceImpl implements CustomerService {
         return customerMapper.selectByPrimaryKey(id);
     }
 
+    private void check(Customer customer) {
+    }
+
     @Override
-    public int Create(Customer customer) {
+    public int create(Customer customer) {
+        check(customer);
         return customerMapper.insertSelective(customer);
     }
 

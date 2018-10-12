@@ -36,8 +36,17 @@ public class ShopServiceImpl implements ShopService {
         return shopMapper.selectByPrimaryKey(id);
     }
 
+    private void check(Shop shop) {
+        if (shop.getName() == null) {
+            throw new CheckException("shop name can not be null");
+        } else if (shop.getUserId() == null) {
+            throw new CheckException("userid can not be null");
+        }
+    }
+
     @Override
     public int Create(Shop shop) {
+        check(shop);
         return shopMapper.insertSelective(shop);
     }
 

@@ -32,8 +32,15 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByPrimaryKey(id);
     }
 
+    private void check(User user) {
+        if (user.getTel() == null || user.getPassword() == null) {
+            throw new CheckException("Tel or Password can not be null");
+        }
+    }
+
     @Override
     public int create(User user) {
+        check(user);
         userMapper.insertSelective(user);
         return user.getId();
     }
@@ -52,7 +59,12 @@ public class UserServiceImpl implements UserService {
     public User findByTel(String tel) {
         Map map = new HashMap();
         map.put("tel", tel);
-        return (User) findByCondition(map, 0).get(0);
+        System.out.println("user try to auth, tel is " + tel);
+        List<User> list = findByCondition(map, 0);
+        if (list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
     }
 
     @Override

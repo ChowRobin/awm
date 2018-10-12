@@ -28,6 +28,7 @@ public class AddressController {
     @PostMapping("/customer/address/create/{customer_id}")
     public ResultBean<Integer> createAddress(@RequestBody Address address,
                                              @PathVariable("customer_id") Integer customerId) {
+        System.out.println("in create address");
         address.setUserId(customerId);
         return new ResultBean<Integer>(addressService.create(address));
     }
