@@ -5,10 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.robin.awm.config.PageConfig;
 import pers.robin.awm.dao.ShopMapper;
+import pers.robin.awm.exception.CheckException;
 import pers.robin.awm.model.Shop;
+import pers.robin.awm.model.User;
 import pers.robin.awm.service.ShopService;
 import pers.robin.awm.service.UserService;
+import pers.robin.awm.util.JWTUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -56,5 +60,15 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public String login(String tel, String password) {
         return userService.login(tel, password);
+    }
+
+    @Override
+    public Integer getUserIdByToken(HttpServletRequest request) {
+        String tel = JWTUtil.getTel(request.getHeader("Authorization"));
+        User user = userService.findByTel(tel);
+        if (user == null) {
+            throw new CheckException("user is not exists");
+        }
+        return user.getId();
     }
 }

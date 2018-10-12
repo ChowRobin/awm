@@ -1,8 +1,10 @@
 package pers.robin.awm.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import pers.robin.awm.model.OrderDetail;
 
+@Repository
 public interface OrderDetailMapper {
     int deleteByPrimaryKey(@Param("orderId") Integer orderId, @Param("itemId") Integer itemId);
 

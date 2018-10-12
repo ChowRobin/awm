@@ -1,7 +1,9 @@
 package pers.robin.awm.dao;
 
+import org.springframework.stereotype.Repository;
 import pers.robin.awm.model.Comment;
 
+@Repository
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer id);
 

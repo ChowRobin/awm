@@ -10,6 +10,7 @@ import pers.robin.awm.service.ShopService;
 import pers.robin.awm.util.CommonUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 
 @RestController
@@ -32,7 +33,6 @@ public class ShopController {
     }
 
     @PostMapping("/update/{id}")
-    @RequiresRoles("shop")
     public ResultBean<Integer> updateShop(@PathVariable Integer id,
                                           @RequestBody Shop shop) {
         shop.setId(id);
@@ -43,4 +43,10 @@ public class ShopController {
     public ResultBean<String> login(@RequestBody User user) {
         return new ResultBean<String>(shopService.login(user.getTel(), user.getPassword()));
     }
+
+    @GetMapping("/getuserid")
+    public ResultBean<Integer> getUserId(HttpServletRequest request) {
+        return new ResultBean<>(shopService.getUserIdByToken(request));
+    }
+
 }

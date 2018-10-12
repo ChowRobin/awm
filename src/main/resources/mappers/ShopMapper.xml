@@ -15,6 +15,9 @@
   </resultMap>
   <sql id="queryCondition">
     <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
       <if test="user_id != null and user_id != ''">
         and user_id = #{user_id}
       </if>
@@ -42,7 +45,7 @@
     delete from shops
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="pers.robin.awm.model.Shop" >
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="pers.robin.awm.model.Shop" >
     insert into shops (id, user_id, name, 
       img, status, address, 
       created_at, updated_at)
@@ -50,7 +53,7 @@
       #{img,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{address,jdbcType=VARCHAR}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="pers.robin.awm.model.Shop" >
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"  parameterType="pers.robin.awm.model.Shop" >
     insert into shops
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

@@ -2,6 +2,7 @@ package pers.robin.awm.service;
 
 import pers.robin.awm.model.Shop;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -20,4 +21,6 @@ public interface ShopService {
     int register(Shop shop);
 
     String login(String tel, String password);
+
+    Integer getUserIdByToken(HttpServletRequest request);
 }

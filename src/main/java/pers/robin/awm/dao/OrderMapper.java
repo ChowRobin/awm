@@ -1,7 +1,9 @@
 package pers.robin.awm.dao;
 
+import org.springframework.stereotype.Repository;
 import pers.robin.awm.model.Order;
 
+@Repository
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pers.robin.awm.bean.JWTToken;
 import pers.robin.awm.model.User;
 import pers.robin.awm.service.UserService;
+import pers.robin.awm.util.CommonUtil;
 import pers.robin.awm.util.JWTUtil;
 
 import javax.servlet.*;
@@ -44,6 +45,8 @@ public class UserFilter implements Filter {
         // 是否为登录，注册请求
         if ("login".equals(path) || "register".equals(path)) {
             System.out.println("login or register");
+        } else if (CommonUtil.isNumeric(path)) {
+            System.out.println("req is select");
         } else {
             auth(req, res);
         }
@@ -53,7 +56,7 @@ public class UserFilter implements Filter {
     private void auth(HttpServletRequest req, HttpServletResponse res) {
         String token = req.getHeader("Authorization");
         if (token == null) {
-            responseError("404", req, res);
+            responseError("401", req, res);
         } else if (!checkToken(new JWTToken(token))) {
             responseError("500", req, res);
         }

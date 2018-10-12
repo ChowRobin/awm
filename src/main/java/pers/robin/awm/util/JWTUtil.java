@@ -47,6 +47,8 @@ public class JWTUtil {
             return jwt.getClaim("tel").asString();
         } catch (JWTDecodeException e) {
             return null;
+        } catch (NullPointerException e) {
+            return null;
         }
     }
 
