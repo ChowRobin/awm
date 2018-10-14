@@ -45,7 +45,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public int Create(Shop shop) {
+    public int create(Shop shop) {
         check(shop);
         return shopMapper.insertSelective(shop);
     }
@@ -62,6 +62,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public int register(Shop shop) {
+        check(shop);
         shopMapper.insertSelective(shop);
         return shop.getId();
     }

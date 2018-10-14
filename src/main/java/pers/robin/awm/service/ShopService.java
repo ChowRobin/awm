@@ -12,7 +12,7 @@ public interface ShopService {
 
     Shop findById(Integer id);
 
-    int Create(Shop shop);
+    int create(Shop shop);
 
     int updateById(Shop shop);
 

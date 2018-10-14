@@ -13,7 +13,7 @@ public class Dishes {
 
     private String img;
 
-    private Byte status;
+    private Short status;
 
     private Integer provider;
 
@@ -23,7 +23,7 @@ public class Dishes {
 
     private Date updatedAt;
 
-    public Dishes(Integer id, String name, String description, Integer cateId, String img, Byte status, Integer provider, Integer price, Date createdAt, Date updatedAt) {
+    public Dishes(Integer id, String name, String description, Integer cateId, String img, Short status, Integer provider, Integer price, Date createdAt, Date updatedAt) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -80,11 +80,11 @@ public class Dishes {
         this.img = img == null ? null : img.trim();
     }
 
-    public Byte getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Short status) {
         this.status = status;
     }
 
