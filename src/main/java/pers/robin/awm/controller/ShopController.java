@@ -49,4 +49,9 @@ public class ShopController {
         return new ResultBean<>(shopService.getUserIdByToken(request));
     }
 
+    @GetMapping("/getshopid")
+    public ResultBean<Integer> getShopId(HttpServletRequest request) {
+        return new ResultBean<>(shopService.getShopIdByToken(request));
+    }
+
 }

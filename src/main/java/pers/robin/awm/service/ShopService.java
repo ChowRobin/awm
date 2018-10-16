@@ -23,4 +23,6 @@ public interface ShopService {
     String login(String tel, String password);
 
     Integer getUserIdByToken(HttpServletRequest request);
+
+    Integer getShopIdByToken(HttpServletRequest request);
 }

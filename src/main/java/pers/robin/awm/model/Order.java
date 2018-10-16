@@ -17,7 +17,7 @@ public class Order {
 
     private Integer provider;
 
-    private Byte status;
+    private Short status;
 
     private String deliveryDate;
 
@@ -29,7 +29,7 @@ public class Order {
 
     private Date updatedAt;
 
-    public Order(Integer id, String code, Integer price, Integer userId, String ip, String address, Integer provider, Byte status, String deliveryDate, String deliveryTime, String remark, Date createdAt, Date updatedAt) {
+    public Order(Integer id, String code, Integer price, Integer userId, String ip, String address, Integer provider, Short status, String deliveryDate, String deliveryTime, String remark, Date createdAt, Date updatedAt) {
         this.id = id;
         this.code = code;
         this.price = price;
@@ -105,11 +105,11 @@ public class Order {
         this.provider = provider;
     }
 
-    public Byte getStatus() {
+    public Short getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Short status) {
         this.status = status;
     }
 

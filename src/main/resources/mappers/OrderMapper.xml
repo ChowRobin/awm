@@ -10,7 +10,7 @@
       <arg column="ip" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="provider" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Short" />
       <arg column="delivery_date" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="delivery_time" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />

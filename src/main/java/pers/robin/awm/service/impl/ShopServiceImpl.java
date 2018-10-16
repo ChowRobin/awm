@@ -1,6 +1,7 @@
 package pers.robin.awm.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.robin.awm.config.PageConfig;
@@ -13,6 +14,7 @@ import pers.robin.awm.service.UserService;
 import pers.robin.awm.util.JWTUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,5 +82,17 @@ public class ShopServiceImpl implements ShopService {
             throw new CheckException("user is not exists");
         }
         return user.getId();
+    }
+
+    @Override
+    public Integer getShopIdByToken(HttpServletRequest request) {
+        int userId = getUserIdByToken(request);
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", userId);
+        List<Shop> list = findByCondition(map, 1);
+        if (list.size() >= 1) {
+            return list.get(0).getId();
+        }
+        return null;
     }
 }
