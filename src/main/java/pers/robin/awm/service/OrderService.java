@@ -1,5 +1,6 @@
 package pers.robin.awm.service;
 
+import pers.robin.awm.bean.OrderStatus;
 import pers.robin.awm.model.Order;
 
 import java.util.List;
@@ -7,11 +8,11 @@ import java.util.Map;
 
 public interface OrderService {
 
-    List<Order> findByCondition(Map<String, Object> map);
+    List<Order> findByCondition(Map<String, Object> map, int pageId);
 
     List<Order> getNewOrders(int shopId);
 
-    Order findById(Order order);
+    Order findById(Integer id);
 
     Integer create(Order order);
 
@@ -19,7 +20,7 @@ public interface OrderService {
 
     Integer delete(Integer id);
 
-    Integer updateStatus(int id, Short status);
+    Integer updateStatus(int id, OrderStatus status);
 
     Integer pay(int id);
 

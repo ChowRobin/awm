@@ -22,6 +22,22 @@
     id, code, price, user_id, ip, address, provider, status, delivery_date, delivery_time, 
     remark, created_at, updated_at
   </sql>
+  <sql id="queryCondition">
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test="userId!= null and userId!= ''">
+        and user_id LIKE #{user_id}
+      </if>
+      <if test="provider!= null and provider!= ''">
+        and provider = #{provider}
+      </if>
+      <if test="status!= null and status!= ''">
+        and status = #{status}
+      </if>
+    </where>
+  </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -187,4 +203,17 @@
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByCondition" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from orders
+    <include refid="queryCondition" />
+  </select>
+  <select id="selectNewOrders" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from orders
+    where status <= 3
+    and shop_id = #{shopId,jdbcType=INTEGER};
+  </select>
 </mapper>

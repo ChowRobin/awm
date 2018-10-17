@@ -19,7 +19,7 @@ public class OrderController {
     @GetMapping("/order/{page_id}")
     public ResultBean<List<Order>> getOrderByCondition(@PathVariable("page_id") int pageId,
                                                  HttpServletRequest request) {
-        return new ResultBean<List<Order>>(orderService.findByCondition(CommonUtil.getParameterMap(request)));
+        return new ResultBean<List<Order>>(orderService.findByCondition(CommonUtil.getParameterMap(request), pageId));
     }
 
     @GetMapping("/shop/getneworders/{shop_id}")
