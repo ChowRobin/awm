@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import pers.robin.awm.model.OrderDetail;
 
+import java.util.List;
+
 @Repository
 public interface OrderDetailMapper {
     int deleteByPrimaryKey(@Param("orderId") Integer orderId, @Param("itemId") Integer itemId);
@@ -17,4 +19,6 @@ public interface OrderDetailMapper {
     int updateByPrimaryKeySelective(OrderDetail record);
 
     int updateByPrimaryKey(OrderDetail record);
+
+    List<OrderDetail> selectByOrderId(int orderId);
 }
