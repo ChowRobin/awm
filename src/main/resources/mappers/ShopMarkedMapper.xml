@@ -32,9 +32,9 @@
     where user_id = #{userId,jdbcType=INTEGER}
       and shop_id = #{shopId,jdbcType=INTEGER}
   </select>
-  <select id="selectMarked" resultMap="ShopResultMap">
+  <select id="selectMarked" resultMap="ShopResultMap" parameterType="java.lang.Integer">
     select
-    shops.id, shops.name, shops.img, shops.address
+    shops.id, shops.user_id, shops.name, shops.img, shops.status, shops.address, shops.created_at, shops.updated_at
     from shop_marked, shops
     where shop_marked.user_id = #{userId,jdbcType=INTEGER}
     and shop_marked.status = 1
@@ -114,7 +114,7 @@
   </update>
   <update id="updateStatus">
     update shop_marked
-    set status = #{status, jdbc=BIT},
+    set status = #{status, jdbcType=BIT},
     where user_id = #{userId,jdbcType=INTEGER}
       and shop_id = #{shopId,jdbcType=INTEGER}
   </update>

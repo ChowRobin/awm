@@ -41,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Integer create(Order order) {
         check(order);
+        if (order.getPrice() == null) order.setPrice(0);
         orderMapper.insertSelective(order);
         return order.getId();
     }
@@ -61,6 +62,11 @@ public class OrderServiceImpl implements OrderService {
         order.setId(id);
         order.setStatus((short) status.getIndex());
         return orderMapper.updateByPrimaryKeySelective(order);
+    }
+
+    @Override
+    public Integer accept(int id) {
+        return updateStatus(id, OrderStatus.WAITING_FOR_PAY);
     }
 
     @Override

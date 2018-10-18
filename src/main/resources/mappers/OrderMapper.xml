@@ -28,7 +28,7 @@
         and id = #{id}
       </if>
       <if test="userId!= null and userId!= ''">
-        and user_id LIKE #{user_id}
+        and user_id = #{userId}
       </if>
       <if test="provider!= null and provider!= ''">
         and provider = #{provider}
@@ -213,7 +213,7 @@
     select
     <include refid="Base_Column_List" />
     from orders
-    where status <= 3
-    and shop_id = #{shopId,jdbcType=INTEGER};
+    where status &lt;= 3
+    and provider = #{shopId,jdbcType=INTEGER};
   </select>
 </mapper>

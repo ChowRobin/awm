@@ -17,6 +17,7 @@ public class ShopMarkedServiceImpl implements ShopMarkedService {
 
     @Override
     public List<Shop> findByCustomerId(int customerId) {
+        List<Shop> list = shopMarkedMapper.selectMarked(customerId);
         return shopMarkedMapper.selectMarked(customerId);
     }
 

@@ -8,7 +8,9 @@ import pers.robin.awm.service.OrderService;
 import pers.robin.awm.util.CommonUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class OrderController {
@@ -27,11 +29,32 @@ public class OrderController {
         return new ResultBean<>(orderService.getNewOrders(shopId));
     }
 
-    @PostMapping("/customer/order/{customer_id}")
+    @GetMapping("/shop/{shop_id}/getorders/{page_id}")
+    public ResultBean<List<Order>> getOrdersByShop(@PathVariable("shop_id") int shopId,
+                                                   @PathVariable("page_id") int pageId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("provider", shopId);
+        return new ResultBean<>(orderService.findByCondition(map, pageId));
+    }
+
+    @GetMapping("/customer/{customer_id}/getorders/{page_id}")
+    public ResultBean<List<Order>> getOrdersByCustomer(@PathVariable("customer_id") int customerId,
+                                                   @PathVariable("page_id") int pageId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("userId", customerId);
+        return new ResultBean<>(orderService.findByCondition(map, pageId));
+    }
+
+    @PostMapping("/customer/createorder/{customer_id}")
     public ResultBean<Integer> createOrder(@PathVariable("customer_id") int customerId,
                                            @RequestBody Order order) {
         order.setUserId(customerId);
         return new ResultBean<>(orderService.create(order));
+    }
+
+    @GetMapping("/order/{id}/accept")
+    public ResultBean<Integer> acceptByShop(@PathVariable int id) {
+        return new ResultBean<>(orderService.accept(id));
     }
 
     @GetMapping("/order/{id}/pay")

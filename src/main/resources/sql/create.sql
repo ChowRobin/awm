@@ -92,7 +92,7 @@ CREATE TABLE orders (
   user_id INT(10) UNSIGNED NOT NULL,
   ip VARCHAR(45),
   address VARCHAR(255),
-  provider INT(10) UNSIGNED,
+  provider INT(10) UNSIGNED NOT NULL,
   status TINYINT(3) UNSIGNED DEFAULT 0,
   delivery_date VARCHAR(30),
   delivery_time VARCHAR(30),

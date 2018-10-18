@@ -24,6 +24,8 @@ public interface OrderService {
 
     Integer pay(int id);
 
+    Integer accept(int id);
+
     Integer cancelByCustomer(int id);
 
     Integer complete(int id);

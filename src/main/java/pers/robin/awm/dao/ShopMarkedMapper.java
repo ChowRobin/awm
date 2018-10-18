@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ShopMarkedMapper {
 
-    List<Shop> selectMarked(int customerId);
+    List<Shop> selectMarked(int userId);
 
     int deleteByPrimaryKey(@Param("userId") Integer userId, @Param("shopId") Integer shopId);
 

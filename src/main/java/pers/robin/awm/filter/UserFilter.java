@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@WebFilter(filterName = "userFilter", urlPatterns = {"/customer/*", "/shop/*"})
+@WebFilter(filterName = "userFilter", urlPatterns = {"/customer/*", "/shop/*"})
 public class UserFilter implements Filter {
 
     @Autowired

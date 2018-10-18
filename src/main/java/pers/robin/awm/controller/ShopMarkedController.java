@@ -9,7 +9,6 @@ import pers.robin.awm.model.Shop;
 import pers.robin.awm.service.ShopMarkedService;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 public class ShopMarkedController {
@@ -25,7 +24,7 @@ public class ShopMarkedController {
     @GetMapping("/customer/{customer_id}/mark/{shop_id}")
     public ResultBean<Integer> markShop(@PathVariable("customer_id") int customerId,
                                         @PathVariable("shop_id") int shopId) {
-        return new ResultBean<>(shopMarkedService.create(customerId, shopId));
+        return new ResultBean<>(shopMarkedService.mark(customerId, shopId));
     }
 
     @GetMapping("/customer/{customer_id}/unmark/{shop_id}")
