@@ -3,13 +3,19 @@ package pers.robin.awm.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import pers.robin.awm.config.PageConfig;
 import pers.robin.awm.dao.CustomerMapper;
 import pers.robin.awm.dao.UserMapper;
+import pers.robin.awm.exception.CheckException;
 import pers.robin.awm.model.Customer;
 import pers.robin.awm.service.CustomerService;
 import pers.robin.awm.service.UserService;
+import pers.robin.awm.util.HttpUtil;
+import pers.robin.awm.util.UploadUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -62,5 +68,19 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public String login(String tel, String password) {
         return userService.login(tel, password);
+    }
+
+    @Override
+    @Transactional
+    public String updateAvatar(Customer customer, MultipartFile img, String basePath) {
+        if (customer == null) {
+            throw new CheckException("customer id not true");
+        }
+        String imgPath;
+        imgPath = basePath + UploadUtil.uploadImage(img);
+        System.out.println(imgPath);
+        customer.setImg(imgPath);
+        updateById(customer);
+        return imgPath;
     }
 }

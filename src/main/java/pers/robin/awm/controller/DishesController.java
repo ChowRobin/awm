@@ -2,10 +2,12 @@ package pers.robin.awm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pers.robin.awm.bean.ResultBean;
 import pers.robin.awm.model.Dishes;
 import pers.robin.awm.service.DishesService;
 import pers.robin.awm.util.CommonUtil;
+import pers.robin.awm.util.HttpUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -44,5 +46,13 @@ public class DishesController {
     @GetMapping("/dishes/delete/{id}")
     public ResultBean<Integer> deleteDishes(@PathVariable int id) {
         return new ResultBean<>(dishesService.deleteById(id));
+    }
+
+    @PostMapping("/dishes/img/{id}")
+    public ResultBean<String> update(@PathVariable int id,
+                                     @RequestParam("file")MultipartFile img,
+                                     HttpServletRequest request) {
+        return new ResultBean<String>(dishesService.updateImg(dishesService.findById(id),
+                img, HttpUtil.serverBasePath(request)));
     }
 }

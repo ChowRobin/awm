@@ -3,11 +3,13 @@ package pers.robin.awm.controller;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pers.robin.awm.bean.ResultBean;
 import pers.robin.awm.model.Shop;
 import pers.robin.awm.model.User;
 import pers.robin.awm.service.ShopService;
 import pers.robin.awm.util.CommonUtil;
+import pers.robin.awm.util.HttpUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,6 +54,14 @@ public class ShopController {
     @GetMapping("/getshopid")
     public ResultBean<Integer> getShopId(HttpServletRequest request) {
         return new ResultBean<>(shopService.getShopIdByToken(request));
+    }
+
+    @PostMapping("/avatar/{id}")
+    public ResultBean<String> update(@PathVariable int id,
+                                     @RequestParam("file")MultipartFile img,
+                                     HttpServletRequest request) {
+        return new ResultBean<String>(shopService.updateAvatar(shopService.findById(id),
+                img, HttpUtil.serverBasePath(request)));
     }
 
 }

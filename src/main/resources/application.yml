@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/awm?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+  resources:
+    static-locations: classpath:classpath:/resources/,classpath:/static/,file:${upload.image.path}
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+debug: true
+logging:
+  level:
+    pers.robin.awm.dao: debug
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  offset-as-page-num: true
+upload:
+  #图片上传
+  image:
+    path: image/
+    max-size: 2  #单位MB
+    accept-type:
+      - image/png
+      - image/jpeg
+      - image/jpg
+

@@ -1,7 +1,9 @@
 package pers.robin.awm.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import pers.robin.awm.model.Customer;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -20,4 +22,6 @@ public interface CustomerService {
     int register(Customer customer);
 
     String login(String tel, String password);
+
+    String updateAvatar(Customer customer, MultipartFile img, String basePath);
 }

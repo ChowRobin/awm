@@ -25,3 +25,5 @@ mvnw*
 /dist/
 /nbdist/
 /.nb-gradle/
+
+/image

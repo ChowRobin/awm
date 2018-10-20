@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import pers.robin.awm.config.PageConfig;
 import pers.robin.awm.dao.ShopMapper;
 import pers.robin.awm.exception.CheckException;
@@ -12,6 +14,7 @@ import pers.robin.awm.model.User;
 import pers.robin.awm.service.ShopService;
 import pers.robin.awm.service.UserService;
 import pers.robin.awm.util.JWTUtil;
+import pers.robin.awm.util.UploadUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -94,5 +97,18 @@ public class ShopServiceImpl implements ShopService {
             return list.get(0).getId();
         }
         return null;
+    }
+
+    @Override
+    @Transactional
+    public String updateAvatar(Shop shop, MultipartFile img, String basePath) {
+        if (shop == null) {
+            throw new CheckException("shop id not true");
+        }
+        String path = basePath + UploadUtil.uploadImage(img);
+        System.out.println(path);
+        shop.setImg(path);
+        updateById(shop);
+        return path;
     }
 }

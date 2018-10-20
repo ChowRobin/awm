@@ -1,5 +1,6 @@
 package pers.robin.awm.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import pers.robin.awm.model.Shop;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,4 +26,6 @@ public interface ShopService {
     Integer getUserIdByToken(HttpServletRequest request);
 
     Integer getShopIdByToken(HttpServletRequest request);
+
+    String updateAvatar(Shop shop, MultipartFile img, String basePath);
 }

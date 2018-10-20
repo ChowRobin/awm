@@ -24,7 +24,7 @@ public class CommentController {
         return new ResultBean<>(commentService.create(comment));
     }
 
-    @PostMapping("/shop/commment/{comment_id}")
+    @PostMapping("/shop/replycomment/{comment_id}")
     public ResultBean<Integer> replyComment(@PathVariable("comment_id") int commentId,
                                             @RequestBody String reply) {
         return new ResultBean<>(commentService.reply(commentId, reply));

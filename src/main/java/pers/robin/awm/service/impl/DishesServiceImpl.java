@@ -3,11 +3,14 @@ package pers.robin.awm.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import pers.robin.awm.config.PageConfig;
 import pers.robin.awm.dao.DishesMapper;
 import pers.robin.awm.exception.CheckException;
 import pers.robin.awm.model.Dishes;
 import pers.robin.awm.service.DishesService;
+import pers.robin.awm.util.UploadUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -63,5 +66,17 @@ public class DishesServiceImpl implements DishesService {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("provider", providerId);
         return dishesMapper.selectByCondition(map);
+    }
+
+    @Override
+    @Transactional
+    public String updateImg(Dishes dishes, MultipartFile img, String basePath) {
+        if (dishes == null) {
+            throw new CheckException("dishes id is not exists");
+        }
+        String path = basePath + UploadUtil.uploadImage(img);
+        dishes.setImg(path);
+        updateById(dishes);
+        return path;
     }
 }
