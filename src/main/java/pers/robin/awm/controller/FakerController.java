@@ -16,5 +16,6 @@ public class FakerController {
     @GetMapping("/create")
     public void create() {
         fakeUtil.createCustomers(10);
+        fakeUtil.createShop();
     }
 }

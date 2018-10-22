@@ -24,5 +24,5 @@ public interface ShopMarkedMapper {
 
     int updateByPrimaryKey(ShopMarked record);
 
-    Integer updateStatus(int customerId, int shopId, boolean status);
+    Integer updateStatus(@Param("userId") int customerId, @Param("shopId") int shopId, @Param("status") Boolean status);
 }

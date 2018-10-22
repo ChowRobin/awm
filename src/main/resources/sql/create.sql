@@ -23,8 +23,11 @@ CREATE TABLE users (
   password VARCHAR(100),
   role TINYINT(3) UNSIGNED,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP NULL
 );
+
+CREATE TRIGGER `update_users_trigger` BEFORE UPDATE ON `users`
+FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE customers (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY,
@@ -33,33 +36,39 @@ CREATE TABLE customers (
   sid VARCHAR(30) NULL,
   img VARCHAR(255) NULL,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP NULL
 );
 CREATE INDEX idx_customer_name ON customers(name(10));
+CREATE TRIGGER `update_customer_trigger` BEFORE UPDATE ON `customers`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE address (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
   user_id INT(10) UNSIGNED NOT NULL,
   description VARCHAR(255) NULL,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ,
 
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+CREATE TRIGGER `update_address_trigger` BEFORE UPDATE ON `address`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE shops (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
   user_id INT(10) UNSIGNED NOT NULL,
   name VARCHAR(30),
   img VARCHAR(255) NULL,
-  status TINYINT(3) UNSIGNED,
+  status TINYINT(3) UNSIGNED default 0,
   address VARCHAR(255),
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ,
 
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_shop_name ON shops(name(30));
+CREATE TRIGGER `update_shops_trigger` BEFORE UPDATE ON `shops`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE cates (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -78,12 +87,14 @@ CREATE TABLE dishes (
   provider INT(10) UNSIGNED NOT NULL,
   price INT(10) UNSIGNED,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ,
 
   FOREIGN KEY (cate_id) REFERENCES cates(id) ON DELETE NO ACTION,
   FOREIGN KEY (provider) REFERENCES shops(id) on DELETE NO ACTION
 );
 CREATE INDEX idx_dishes_name ON dishes(name(30));
+CREATE TRIGGER `update_dishes_trigger` BEFORE UPDATE ON `dishes`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE orders (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -98,7 +109,7 @@ CREATE TABLE orders (
   delivery_time VARCHAR(30),
   remark VARCHAR(255) NULL,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE NO ACTION,
   FOREIGN KEY (provider) REFERENCES shops(id) ON DELETE NO ACTION
 );
@@ -106,6 +117,8 @@ CREATE TABLE orders (
 CREATE UNIQUE INDEX idx_order_code ON orders(code(30));
 # 优先处理录入时间长的订单
 CREATE INDEX idx_created_time ON orders(created_at);
+CREATE TRIGGER `update_orders_trigger` BEFORE UPDATE ON `orders`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE order_details (
   order_id INT(10) UNSIGNED NOT NULL,
@@ -126,10 +139,12 @@ CREATE TABLE comments (
   shop_id INT(10) UNSIGNED NOT NULL,
   reply VARCHAR(512) NULL,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (shop_id) REFERENCES shops(id) ON DELETE CASCADE
 );
+CREATE TRIGGER `update_comments_trigger` BEFORE UPDATE ON `comments`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE config (
   `key` VARCHAR(127),
@@ -141,8 +156,10 @@ CREATE TABLE shop_marked (
   shop_id INT(10) UNSIGNED NOT NULL,
   status BOOLEAN,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL ,
   PRIMARY KEY (user_id, shop_id),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (shop_id) REFERENCES shops(id) ON DELETE CASCADE
-)
+);
+CREATE TRIGGER `update_shop_marked_trigger` BEFORE UPDATE ON `shop_marked`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();

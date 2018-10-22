@@ -27,3 +27,5 @@ mvnw*
 /.nb-gradle/
 
 /image
+cert-1540218656562_www.nightwing.top.pfx
+keystore.p12

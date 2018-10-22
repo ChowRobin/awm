@@ -4,6 +4,7 @@ spring:
     username: root
     password: root
     url: jdbc:mysql://localhost:3306/awm?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+
   resources:
     static-locations: classpath:classpath:/resources/,classpath:/static/,file:${upload.image.path}
 mybatis:
@@ -27,4 +28,10 @@ upload:
       - image/png
       - image/jpeg
       - image/jpg
-
+server:
+  ssl:
+    key-store: keystore.p12
+    key-store-password: qwer123
+    key-store-type: PKCS12
+    key-alias: tomcat
+  port: 443

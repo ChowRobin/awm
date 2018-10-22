@@ -36,6 +36,12 @@ public class Dishes {
         this.updatedAt = updatedAt;
     }
 
+    public Dishes(String name, String description, Integer price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
     public Dishes() {
         super();
     }
