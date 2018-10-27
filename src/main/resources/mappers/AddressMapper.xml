@@ -6,13 +6,15 @@
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="created_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="updated_at" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, description, created_at, updated_at
+    id, user_id, tel, name ,description, created_at, updated_at
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,9 +32,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="pers.robin.awm.model.Address" >
-    insert into address (id, user_id, description, 
+    insert into address (id, user_id, tel, name, description,
       created_at, updated_at)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR},
+    #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="pers.robin.awm.model.Address" >
@@ -43,6 +46,12 @@
       </if>
       <if test="userId != null" >
         user_id,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="name != null" >
+        name,
       </if>
       <if test="description != null" >
         description,
@@ -61,6 +70,12 @@
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
+      <if test="tel != null" >
+        #{tel ,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name ,jdbcType=VARCHAR},
+      </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
       </if>
@@ -78,6 +93,12 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
+      <if test="tel != null" >
+        tel = #{tel ,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name ,jdbcType=VARCHAR},
+      </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
       </if>
@@ -93,6 +114,8 @@
   <update id="updateByPrimaryKey" parameterType="pers.robin.awm.model.Address" >
     update address
     set user_id = #{userId,jdbcType=INTEGER},
+      tel = #{tel ,jdbcType=VARCHAR},
+      name = #{name ,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}

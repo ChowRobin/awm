@@ -7,18 +7,40 @@ public class Address {
 
     private Integer userId;
 
+    private String tel;
+
+    private String name;
+
     private String description;
 
     private Date createdAt;
 
     private Date updatedAt;
 
-    public Address(Integer id, Integer userId, String description, Date createdAt, Date updatedAt) {
+    public Address(Integer id, Integer userId, String tel, String name, String description, Date createdAt, Date updatedAt) {
         this.id = id;
         this.userId = userId;
+        this.tel = tel;
+        this.name = name;
         this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Address() {
