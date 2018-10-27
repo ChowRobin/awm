@@ -8,4 +8,10 @@ public interface ConfigMapper {
     int insert(Config record);
 
     int insertSelective(Config record);
+
+    int update(Config config);
+
+    Config selectByKey(String key);
+
+    int delete(String key);
 }

@@ -9,17 +9,17 @@
     </constructor>
   </resultMap>
   <insert id="insert" parameterType="pers.robin.awm.model.Config" >
-    insert into config (key, value)
+    insert into config (`key`, `value`)
     values (#{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="pers.robin.awm.model.Config" >
     insert into config
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="key != null" >
-        key,
+        `key`,
       </if>
       <if test="value != null" >
-        value,
+        `value`
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -31,4 +31,18 @@
       </if>
     </trim>
   </insert>
+  <update id="update" parameterType="pers.robin.awm.model.Config" >
+    update config
+    set `value`= #{value, jdbcType=VARCHAR}
+    where `key` = #{key, jdbcType=VARCHAR}
+  </update>
+  <delete id="delete" parameterType="java.lang.String">
+    delete from config
+    where `key` = #{key, jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select `key`, `value`
+    from config
+    where `key` = #{key, jdbcType=VARCHAR}
+  </select>
 </mapper>
