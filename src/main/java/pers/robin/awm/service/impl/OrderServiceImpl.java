@@ -7,7 +7,10 @@ import pers.robin.awm.bean.OrderStatus;
 import pers.robin.awm.config.PageConfig;
 import pers.robin.awm.dao.OrderMapper;
 import pers.robin.awm.model.Order;
+import pers.robin.awm.model.OrderDetail;
+import pers.robin.awm.service.OrderDetailService;
 import pers.robin.awm.service.OrderService;
+import pers.robin.awm.viewmodel.OrderView;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
 
     @Override
     public List<Order> findByCondition(Map<String, Object> map, int pageId) {
@@ -82,5 +88,26 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Integer complete(int id) {
         return updateStatus(id, OrderStatus.COMPLETED);
+    }
+
+    @Override
+    public OrderView modelToViewModel(Order order) {
+        OrderView orderView = new OrderView(
+                order.getId(),
+                order.getCode(),
+                order.getPrice(),
+                order.getUserId(),
+                order.getIp(),
+                order.getAddress(),
+                order.getProvider(),
+                order.getStatus(),
+                order.getDeliveryDate(),
+                order.getDeliveryTime(),
+                order.getRemark(),
+                order.getCreatedAt(),
+                order.getUpdatedAt()
+        );
+        orderView.setOrderDetailViews(orderDetailService.findByOrderId(order.getId()));
+        return orderView;
     }
 }

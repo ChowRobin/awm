@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pers.robin.awm.dao.OrderDetailMapper" >
-  <cache type="pers.robin.awm.util.RedisCache" />
+  <!--<cache type="pers.robin.awm.util.RedisCache" />-->
   <resultMap id="BaseResultMap" type="pers.robin.awm.model.OrderDetail" >
     <constructor >
       <idArg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pers.robin.awm.bean.ResultBean;
 import pers.robin.awm.model.OrderDetail;
 import pers.robin.awm.service.OrderDetailService;
+import pers.robin.awm.viewmodel.OrderDetailView;
 
 import java.util.Collection;
 
@@ -15,7 +16,7 @@ public class OrderDetailController {
     private OrderDetailService orderDetailService;
 
     @GetMapping("/order/details/{order_id}")
-    public ResultBean<Collection<OrderDetail>> getDetailByOrder(@PathVariable("order_id") int orderId) {
+    public ResultBean<Collection<OrderDetailView>> getDetailByOrder(@PathVariable("order_id") int orderId) {
         return new ResultBean<>(orderDetailService.findByOrderId(orderId));
     }
 

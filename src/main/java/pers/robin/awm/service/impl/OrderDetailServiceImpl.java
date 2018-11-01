@@ -10,8 +10,10 @@ import pers.robin.awm.model.OrderDetail;
 import pers.robin.awm.service.DishesService;
 import pers.robin.awm.service.OrderDetailService;
 import pers.robin.awm.service.OrderService;
+import pers.robin.awm.viewmodel.OrderDetailView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderDetailServiceImpl implements OrderDetailService {
@@ -42,8 +44,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public List<OrderDetail> findByOrderId(int orderId) {
-        return orderDetailMapper.selectByOrderId(orderId);
+    public List<OrderDetailView> findByOrderId(int orderId) {
+        List<OrderDetail> list = orderDetailMapper.selectByOrderId(orderId);
+        List<OrderDetailView> detailViews = list.stream()
+                                                .map(this::modelToViewModel)
+                                                .collect(Collectors.toList());
+        return detailViews;
     }
 
     void check(OrderDetail orderDetail) {
@@ -79,5 +85,19 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         }
         updateOrderPrice(orderDetail.getOrderId(), -orderDetail.getPrice());
         return orderDetailMapper.deleteByPrimaryKey(orderId, itemId);
+    }
+
+    @Override
+    public OrderDetailView modelToViewModel(OrderDetail orderDetail) {
+        OrderDetailView orderDetailView = new OrderDetailView(
+            orderDetail.getOrderId(),
+            orderDetail.getItemId(),
+            orderDetail.getNum(),
+            orderDetail.getPrice()
+        );
+        orderDetailView.setName(dishesService
+                .findById(orderDetail.getItemId())
+                .getName());
+        return orderDetailView;
     }
 }

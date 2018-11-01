@@ -2,6 +2,7 @@ package pers.robin.awm.service;
 
 import pers.robin.awm.bean.OrderStatus;
 import pers.robin.awm.model.Order;
+import pers.robin.awm.viewmodel.OrderView;
 
 import java.util.List;
 import java.util.Map;
@@ -29,4 +30,6 @@ public interface OrderService {
     Integer cancelByCustomer(int id);
 
     Integer complete(int id);
+
+    OrderView modelToViewModel(Order order);
 }
