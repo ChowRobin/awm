@@ -26,8 +26,8 @@ CREATE TABLE users (
   updated_at TIMESTAMP NULL
 );
 
-# CREATE TRIGGER `update_users_trigger` BEFORE UPDATE ON `users`
-# FOR EACH ROW SET NEW.`updated_at` = NOW();
+CREATE TRIGGER `update_users_trigger` BEFORE UPDATE ON `users`
+FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE customers (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY,
@@ -39,8 +39,8 @@ CREATE TABLE customers (
   updated_at TIMESTAMP NULL
 );
 CREATE INDEX idx_customer_name ON customers(name(10));
-# CREATE TRIGGER `update_customer_trigger` BEFORE UPDATE ON `customers`
-#   FOR EACH ROW SET NEW.`updated_at` = NOW();
+CREATE TRIGGER `update_customer_trigger` BEFORE UPDATE ON `customers`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE address (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -53,8 +53,8 @@ CREATE TABLE address (
 
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
-# CREATE TRIGGER `update_address_trigger` BEFORE UPDATE ON `address`
-#   FOR EACH ROW SET NEW.`updated_at` = NOW();
+CREATE TRIGGER `update_address_trigger` BEFORE UPDATE ON `address`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE shops (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -69,8 +69,8 @@ CREATE TABLE shops (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_shop_name ON shops(name(30));
-# CREATE TRIGGER `update_shops_trigger` BEFORE UPDATE ON `shops`
-#   FOR EACH ROW SET NEW.`updated_at` = NOW();
+CREATE TRIGGER `update_shops_trigger` BEFORE UPDATE ON `shops`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE cates (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -95,8 +95,8 @@ CREATE TABLE dishes (
   FOREIGN KEY (provider) REFERENCES shops(id) on DELETE NO ACTION
 );
 CREATE INDEX idx_dishes_name ON dishes(name(30));
-# CREATE TRIGGER `update_dishes_trigger` BEFORE UPDATE ON `dishes`
-#   FOR EACH ROW SET NEW.`updated_at` = NOW();
+CREATE TRIGGER `update_dishes_trigger` BEFORE UPDATE ON `dishes`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE orders (
   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -119,8 +119,8 @@ CREATE TABLE orders (
 CREATE UNIQUE INDEX idx_order_code ON orders(code(30));
 # 优先处理录入时间长的订单
 CREATE INDEX idx_created_time ON orders(created_at);
-# CREATE TRIGGER `update_orders_trigger` BEFORE UPDATE ON `orders`
-#   FOR EACH ROW SET NEW.`updated_at` = NOW();
+CREATE TRIGGER `update_orders_trigger` BEFORE UPDATE ON `orders`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE order_details (
   order_id INT(10) UNSIGNED NOT NULL,
@@ -145,8 +145,8 @@ CREATE TABLE comments (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (shop_id) REFERENCES shops(id) ON DELETE CASCADE
 );
-# CREATE TRIGGER `update_comments_trigger` BEFORE UPDATE ON `comments`
-#   FOR EACH ROW SET NEW.`updated_at` = NOW();
+CREATE TRIGGER `update_comments_trigger` BEFORE UPDATE ON `comments`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();
 
 CREATE TABLE config (
   `key` VARCHAR(127),
@@ -163,5 +163,5 @@ CREATE TABLE shop_marked (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (shop_id) REFERENCES shops(id) ON DELETE CASCADE
 );
-# CREATE TRIGGER `update_shop_marked_trigger` BEFORE UPDATE ON `shop_marked`
-#   FOR EACH ROW SET NEW.`updated_at` = NOW();
+CREATE TRIGGER `update_shop_marked_trigger` BEFORE UPDATE ON `shop_marked`
+  FOR EACH ROW SET NEW.`updated_at` = NOW();

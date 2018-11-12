@@ -48,7 +48,8 @@ public class DishesServiceImpl implements DishesService {
     @Override
     public int create(Dishes dishes) {
         check(dishes);
-        return dishesMapper.insertSelective(dishes);
+        dishesMapper.insertSelective(dishes);
+        return dishes.getId();
     }
 
     @Override
