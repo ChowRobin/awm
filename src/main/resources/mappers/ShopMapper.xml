@@ -20,8 +20,8 @@
       <if test="id != null and id != ''">
         and id = #{id}
       </if>
-      <if test="user_id != null and user_id != ''">
-        and user_id = #{user_id}
+      <if test="userId != null and userId != ''">
+        and user_id = #{userId}
       </if>
       <if test="name != null and name != ''">
         and `name` LIKE #{name}
