@@ -6,6 +6,7 @@ public enum OrderStatus {
     WAITING_FOR_PAY(1),
     INTERNAL_ERROR(41),
     PAID(3),
+    ACCEPT(5),
     CANCELED_BY_CUSTOMER(42),
     CANCELED_BY_ADMIN(43),
     PAY_TIMEOUT(44),

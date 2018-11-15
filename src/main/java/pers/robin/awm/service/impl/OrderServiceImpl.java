@@ -72,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Integer accept(int id) {
-        return updateStatus(id, OrderStatus.WAITING_FOR_PAY);
+        return updateStatus(id, OrderStatus.ACCEPT);
     }
 
     @Override
